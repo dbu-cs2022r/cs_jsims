@@ -15,5 +15,5 @@ import java.util.List;
 public interface ICollegeService {
      boolean register(College college)throws SQLException;
 
-    List<String> getAll()throws SQLException;
+    List<College> getAll()throws SQLException;
 }

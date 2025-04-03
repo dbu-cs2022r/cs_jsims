@@ -20,11 +20,12 @@ public class CollegeService implements ICollegeService {
 
     @Override
     public boolean register(College college) throws SQLException {
+        //
         return collegePersistance.save(college);
     }
 
     @Override
-    public List<String> getAll() throws SQLException {
+    public List<College> getAll() throws SQLException {
         return collegePersistance.getAll();
     }
 }

@@ -16,5 +16,5 @@ public interface ICollegePersistence {
 
     boolean save(College college) throws SQLException;
 
-    List<String> getAll() throws SQLException;
+    List<College> getAll() throws SQLException;
 }

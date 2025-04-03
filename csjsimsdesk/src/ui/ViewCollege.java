@@ -4,6 +4,7 @@
  */
 package ui;
 
+import domain.College;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +40,8 @@ public class ViewCollege extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCollege = new javax.swing.JTable();
 
+        setClosable(true);
+        setTitle("Colleges");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -69,11 +72,11 @@ public class ViewCollege extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "#", "College"
+                "#", "ID", "College"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -84,7 +87,9 @@ public class ViewCollege extends javax.swing.JInternalFrame {
         if (tblCollege.getColumnModel().getColumnCount() > 0) {
             tblCollege.getColumnModel().getColumn(0).setResizable(false);
             tblCollege.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblCollege.getColumnModel().getColumn(1).setPreferredWidth(400);
+            tblCollege.getColumnModel().getColumn(1).setResizable(false);
+            tblCollege.getColumnModel().getColumn(1).setPreferredWidth(30);
+            tblCollege.getColumnModel().getColumn(2).setPreferredWidth(300);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,9 +99,9 @@ public class ViewCollege extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRefresh))
-                .addContainerGap(363, Short.MAX_VALUE))
+                    .addComponent(btnRefresh)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,8 +137,8 @@ public class ViewCollege extends javax.swing.JInternalFrame {
             var colleges = service.getAll();
             DefaultTableModel collegeTableModel = (DefaultTableModel) tblCollege.getModel();
             collegeTableModel.setRowCount(0);
-            for (String college : colleges) {
-                collegeTableModel.addRow(new Object[]{collegeTableModel.getRowCount() + 1, college});
+            for (College college : colleges) {
+                collegeTableModel.addRow(new Object[]{collegeTableModel.getRowCount() + 1, college.getId(), college.getName()});
             }
         } catch (SQLException ex) {
             Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
