@@ -21,8 +21,6 @@ public class CollegePersistence implements ICollegePersistence {
     @Override
     public boolean save(College college) throws SQLException {
         int affectedRow;
-        //
-        //
         String query = "Insert into college (name) Values(?)";
         try (Connection conn = DbConnection.getConnection()) {
             try (PreparedStatement prepare = conn.prepareStatement(query)) {

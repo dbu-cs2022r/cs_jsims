@@ -4,6 +4,18 @@
  */
 package ui;
 
+import domain.College;
+import domain.Department;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import service.CollegeService;
+import service.DepartmentService;
+import service.ICollegeService;
+import service.IDepartmentService;
+import utility.DropListItem;
+
 /**
  *
  * @author ChalewT
@@ -12,6 +24,9 @@ public class NewDepartment extends javax.swing.JDialog {
 
     /**
      * Creates new form NewDepartment
+     *
+     * @param parent
+     * @param modal
      */
     public NewDepartment(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,6 +49,11 @@ public class NewDepartment extends javax.swing.JDialog {
         cmbCollege = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Department");
 
@@ -82,8 +102,41 @@ public class NewDepartment extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-       
+        try {
+            if ("".equalsIgnoreCase(txtName.getText()) || cmbCollege.getSelectedIndex() < 0) {
+                JOptionPane.showMessageDialog(this, "Please fill all required fields.", "JSims", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            Department department = new Department();
+            IDepartmentService service = new DepartmentService();
+            department.setName(txtName.getText());
+            var collegeSelected = (DropListItem) cmbCollege.getSelectedItem();
+            department.setCollegeId(collegeSelected.getCodeValue());
+            var saved = service.register(department);
+            if (saved) {
+                JOptionPane.showMessageDialog(this, "Record saved successfuly.", "JSims", JOptionPane.INFORMATION_MESSAGE);
+                txtName.setText("");
+                txtName.requestFocusInWindow();
+            } else {
+                JOptionPane.showMessageDialog(this, "Saving record faild. Try again.", "JSims", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewCollege.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            ICollegeService service = new CollegeService();
+            var colleges = service.getAll();
+            for (College college : colleges) {
+                DropListItem collegeItem = new DropListItem(college.getId(), college.getName());
+                cmbCollege.addItem(collegeItem);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -129,7 +182,7 @@ public class NewDepartment extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cmbCollege;
+    private javax.swing.JComboBox<DropListItem> cmbCollege;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtName;
