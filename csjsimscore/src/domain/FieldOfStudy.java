@@ -8,11 +8,10 @@ package domain;
  *
  * @author ChalewT
  */
-public class Department {
-
-    int id;
+public class FieldOfStudy {
+     int id;
     String name;
-    int collegeId;
+    int departmentId;
 
     public int getId() {
         return id;
@@ -30,12 +29,12 @@ public class Department {
         this.name = name;
     }
 
-    public int getCollegeId() {
-        return collegeId;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setCollegeId(int collegeId) {
-        this.collegeId = collegeId;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
-
+    
 }
