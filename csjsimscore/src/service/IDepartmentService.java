@@ -13,6 +13,8 @@ import java.util.List;
  * @author ChalewT
  */
 public interface IDepartmentService {
-    boolean register(Department department)throws SQLException;
-    List<Department> getByCollegeId(int collegeId)throws SQLException;
+
+    boolean register(Department department) throws SQLException;
+
+    List<Department> getByCollegeId(int collegeId) throws SQLException;
 }

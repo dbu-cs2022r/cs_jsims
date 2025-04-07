@@ -25,7 +25,7 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public List<Department> getByCollegeId(int collegeId) throws SQLException {
-        throw new UnsupportedOperationException("Not implemented yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return departmentPersistance.getByCollegeId(collegeId);
     }
 
 }
