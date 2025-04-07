@@ -163,6 +163,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
             return;
         }
         try {
+            cmbDepartment.removeAllItems();
             DropListItem collegeItem = (DropListItem) cmbCollege.getSelectedItem();
             int collegeId = collegeItem.getCodeValue();
             IDepartmentService departmentService = new DepartmentService();
