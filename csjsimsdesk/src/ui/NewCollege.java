@@ -87,6 +87,10 @@ public class NewCollege extends javax.swing.JDialog {
             }
             College college = new College();
             ICollegeService service = new CollegeService();
+            
+            
+            
+            
             college.setName(txtName.getText());
             var saved = service.register(college);
             if (saved) {

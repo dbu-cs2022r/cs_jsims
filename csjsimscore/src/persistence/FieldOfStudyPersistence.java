@@ -15,7 +15,7 @@ public class FieldOfStudyPersistence implements IFieldOfStudyPersistence {
 
     @Override
     public boolean save(FieldOfStudy fieldOfStudy) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not implemented yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

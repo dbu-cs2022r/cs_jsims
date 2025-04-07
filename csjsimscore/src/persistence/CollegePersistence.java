@@ -22,12 +22,12 @@ public class CollegePersistence implements ICollegePersistence {
     public boolean save(College college) throws SQLException {
         int affectedRow;
         String query = "Insert into college (name) Values(?)";
-        try (Connection conn = DbConnection.getConnection()) {
-            try (PreparedStatement prepare = conn.prepareStatement(query)) {
-                prepare.setString(1, college.getName());
-                affectedRow = prepare.executeUpdate();
-            }
+        try (Connection conn = DbConnection.getConnection(); 
+                PreparedStatement prepare = conn.prepareStatement(query)) {
+            prepare.setString(1, college.getName());
+            affectedRow = prepare.executeUpdate();
         }
+
         return affectedRow > 0;
     }
 

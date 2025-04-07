@@ -15,7 +15,7 @@ public class FieldOfStudyService implements IFieldOfStudyService {
 
     @Override
     public boolean register(FieldOfStudy FieldOfStudy) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not Implemented yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
