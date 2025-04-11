@@ -1,4 +1,3 @@
-
 package domain;
 
 /**
@@ -6,7 +5,8 @@ package domain;
  * @author ChalewT
  */
 public class FieldOfStudy {
-     int id;
+
+    int id;
     String name;
     int departmentId;
 
@@ -33,5 +33,5 @@ public class FieldOfStudy {
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
-    
+
 }
