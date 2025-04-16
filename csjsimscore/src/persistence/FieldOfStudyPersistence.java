@@ -5,6 +5,8 @@
 package persistence;
 
 import domain.FieldOfStudy;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -15,7 +17,16 @@ public class FieldOfStudyPersistence implements IFieldOfStudyPersistence {
 
     @Override
     public boolean save(FieldOfStudy fieldOfStudy) throws SQLException {
-        throw new UnsupportedOperationException("Not implemented yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int affectedRow;
+        String query = "Insert into FieldOfStudy(name, departmentid) values(?,?)";
+        try (Connection conn = DbConnection.getConnection()) {
+            try (PreparedStatement prepare = conn.prepareStatement(query)) {
+                prepare.setString(1, fieldOfStudy.getName());
+                prepare.setInt(2, fieldOfStudy.getDepartmentId());
+                affectedRow = prepare.executeUpdate();
+            }
+        }
+        return affectedRow > 0;
     }
-    
+
 }

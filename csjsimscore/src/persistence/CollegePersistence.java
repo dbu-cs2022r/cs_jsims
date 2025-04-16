@@ -18,11 +18,13 @@ import java.util.List;
  */
 public class CollegePersistence implements ICollegePersistence {
 
+    
+    
     @Override
     public boolean save(College college) throws SQLException {
         int affectedRow;
         String query = "Insert into college (name) Values(?)";
-        try (Connection conn = DbConnection.getConnection(); 
+        try (Connection conn = DbConnection.getConnection();//login to database server 
                 PreparedStatement prepare = conn.prepareStatement(query)) {
             prepare.setString(1, college.getName());
             affectedRow = prepare.executeUpdate();
