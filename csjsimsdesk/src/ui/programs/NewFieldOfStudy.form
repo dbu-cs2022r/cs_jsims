@@ -38,7 +38,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                      <Component id="cmbCollege" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                      <Component id="cmbCollegeId" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
                   </Group>
                   <Component id="cmbDepartment" min="-2" pref="242" max="-2" attributes="0"/>
               </Group>
@@ -52,7 +52,7 @@
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbCollege" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbCollegeId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -92,14 +92,14 @@
         <Property name="text" type="java.lang.String" value="College"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbCollege">
+    <Component class="javax.swing.JComboBox" name="cmbCollegeId">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbCollegeItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbCollegeIdItemStateChanged"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DropListItem&gt;"/>

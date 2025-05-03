@@ -47,7 +47,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        cmbCollege = new javax.swing.JComboBox<>();
+        cmbCollegeId = new javax.swing.JComboBox<>();
         cmbDepartment = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
 
@@ -69,9 +69,9 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
 
         jLabel2.setText("College");
 
-        cmbCollege.addItemListener(new java.awt.event.ItemListener() {
+        cmbCollegeId.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbCollegeItemStateChanged(evt);
+                cmbCollegeIdItemStateChanged(evt);
             }
         });
 
@@ -92,7 +92,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnSave)
                         .addComponent(txtName)
-                        .addComponent(cmbCollege, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbCollegeId, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cmbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(190, Short.MAX_VALUE))
         );
@@ -102,7 +102,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cmbCollege, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCollegeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -151,20 +151,20 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
             var colleges = service.getAll();
             for (College college : colleges) {
                 DropListItem collegeItem = new DropListItem(college.getId(), college.getName());
-                cmbCollege.addItem(collegeItem);
+                cmbCollegeId.addItem(collegeItem);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void cmbCollegeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCollegeItemStateChanged
-        if (cmbCollege.getSelectedIndex() < 0) {
+    private void cmbCollegeIdItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCollegeIdItemStateChanged
+        if (cmbCollegeId.getSelectedIndex() < 0) {
             return;
         }
         try {
             cmbDepartment.removeAllItems();
-            DropListItem collegeItem = (DropListItem) cmbCollege.getSelectedItem();
+            DropListItem collegeItem = (DropListItem) cmbCollegeId.getSelectedItem();
             int collegeId = collegeItem.getCodeValue();
             IDepartmentService departmentService = new DepartmentService();
             var departments = departmentService.getByCollegeId(collegeId);
@@ -175,7 +175,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
         }
-    }//GEN-LAST:event_cmbCollegeItemStateChanged
+    }//GEN-LAST:event_cmbCollegeIdItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -221,7 +221,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<DropListItem> cmbCollege;
+    private javax.swing.JComboBox<DropListItem> cmbCollegeId;
     private javax.swing.JComboBox<DropListItem> cmbDepartment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
