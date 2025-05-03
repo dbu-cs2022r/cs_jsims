@@ -18,16 +18,18 @@ import java.util.List;
  */
 public class CollegePersistence implements ICollegePersistence {
 
+    
+    
     @Override
     public boolean save(College college) throws SQLException {
         int affectedRow;
         String query = "Insert into college (name) Values(?)";
-        try (Connection conn = DbConnection.getConnection()) {
-            try (PreparedStatement prepare = conn.prepareStatement(query)) {
-                prepare.setString(1, college.getName());
-                affectedRow = prepare.executeUpdate();
-            }
+        try (Connection conn = DbConnection.getConnection();//login to database server 
+                PreparedStatement prepare = conn.prepareStatement(query)) {
+            prepare.setString(1, college.getName());
+            affectedRow = prepare.executeUpdate();
         }
+
         return affectedRow > 0;
     }
 
@@ -35,16 +37,17 @@ public class CollegePersistence implements ICollegePersistence {
     public List<College> getAll() throws SQLException {
         List<College> colleges = new ArrayList<College>();
         String sql = "Select * from college Order By name ASC";
-        Connection conn = DbConnection.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet rslt = stmt.executeQuery();
-        while (rslt.next()) {
-            College college = new College();
-            college.setId(rslt.getInt("id"));
-            college.setName(rslt.getString("name"));
-            colleges.add(college);
+        try (Connection conn = DbConnection.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                ResultSet rslt = stmt.executeQuery();
+                while (rslt.next()) {
+                    College college = new College();
+                    college.setId(rslt.getInt("id"));
+                    college.setName(rslt.getString("name"));
+                    colleges.add(college);
+                }
+            }
         }
-
         return colleges;
     }
 

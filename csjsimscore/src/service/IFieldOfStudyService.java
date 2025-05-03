@@ -4,17 +4,14 @@
  */
 package service;
 
-import domain.Department;
+import domain.FieldOfStudy;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  *
  * @author ChalewT
  */
-public interface IDepartmentService {
+public interface IFieldOfStudyService {
 
-    boolean register(Department department) throws SQLException;
-
-    List<Department> getByCollegeId(int collegeId) throws SQLException;
+    boolean register(FieldOfStudy FieldOfStudy) throws SQLException;
 }

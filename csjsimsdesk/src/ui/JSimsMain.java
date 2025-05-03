@@ -4,6 +4,8 @@
  */
 package ui;
 
+import ui.programs.NewFieldOfStudy;
+
 /**
  *
  * @author ChalewT
@@ -34,6 +36,8 @@ public class JSimsMain extends javax.swing.JFrame {
         mnuiNewCollege = new javax.swing.JMenuItem();
         mnuiNewDepartment = new javax.swing.JMenuItem();
         mnuiViewColleges = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        mnuiNewFieldOfStudy = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -85,6 +89,18 @@ public class JSimsMain extends javax.swing.JFrame {
         mnuOrganization.add(mnuiViewColleges);
 
         menuBar.add(mnuOrganization);
+
+        jMenu1.setText("Program");
+
+        mnuiNewFieldOfStudy.setText("Field of Study");
+        mnuiNewFieldOfStudy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuiNewFieldOfStudyActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuiNewFieldOfStudy);
+
+        menuBar.add(jMenu1);
 
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
@@ -140,6 +156,12 @@ public class JSimsMain extends javax.swing.JFrame {
         faculty.toFront();
     }//GEN-LAST:event_mnuiViewCollegesActionPerformed
 
+    private void mnuiNewFieldOfStudyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiNewFieldOfStudyActionPerformed
+        NewFieldOfStudy field = new NewFieldOfStudy(this, true);
+        field.setLocationRelativeTo(this);
+        field.setVisible(true);
+    }//GEN-LAST:event_mnuiNewFieldOfStudyActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,10 +204,12 @@ public class JSimsMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuOrganization;
     private javax.swing.JMenuItem mnuiNewCollege;
     private javax.swing.JMenuItem mnuiNewDepartment;
+    private javax.swing.JMenuItem mnuiNewFieldOfStudy;
     private javax.swing.JMenuItem mnuiViewColleges;
     // End of variables declaration//GEN-END:variables
 

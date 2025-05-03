@@ -2,19 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package service;
+package persistence;
 
-import domain.Department;
+import domain.FieldOfStudy;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  *
  * @author ChalewT
  */
-public interface IDepartmentService {
+public interface IFieldOfStudyPersistence {
 
-    boolean register(Department department) throws SQLException;
-
-    List<Department> getByCollegeId(int collegeId) throws SQLException;
+    boolean save(FieldOfStudy fieldOfStudy) throws SQLException;
 }

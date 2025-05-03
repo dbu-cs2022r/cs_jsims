@@ -4,10 +4,14 @@
  */
 package persistence;
 
+import domain.College;
 import domain.Department;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +31,24 @@ public class DepartmentPersistence implements IDepartmentPersistence {
             }
         }
         return affectedRow > 0;
+    }
+
+    @Override
+    public List<Department> getByCollegeId(int collegeId) throws SQLException {
+        List<Department> departments = new ArrayList<Department>();
+        String query = "Select * from department where collegeid=? Order By name ASC";
+        Connection conn = DbConnection.getConnection();
+        PreparedStatement prepare = conn.prepareStatement(query);
+        prepare.setInt(1, collegeId);
+        ResultSet rslt = prepare.executeQuery();
+        while (rslt.next()) {
+            Department department = new Department();
+            department.setId(rslt.getInt("id"));
+            department.setName(rslt.getString("name"));
+            department.setCollegeId(rslt.getInt("collegeid"));
+            departments.add(department);
+        }
+        return departments;
     }
 
 }

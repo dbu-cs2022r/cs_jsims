@@ -9,9 +9,11 @@ package domain;
  * @author ChalewT
  */
 public class Department {
-     int id;
+
+    int id;
     String name;
     int collegeId;
+
     public int getId() {
         return id;
     }
@@ -35,5 +37,5 @@ public class Department {
     public void setCollegeId(int collegeId) {
         this.collegeId = collegeId;
     }
-    
+
 }
