@@ -5,11 +5,15 @@
 package service;
 
 import domain.ProgramAdmission;
+import java.util.List;
 
 /**
  *
  * @author ChalewT
  */
 public interface IProgramAdmissionService {
-     public boolean addProgramAdmission(ProgramAdmission programAdmission) throws Exception;
+
+    public boolean addProgramAdmission(ProgramAdmission programAdmission) throws Exception;
+
+    List<ProgramAdmission> getProgramAdmissions() throws Exception;
 }

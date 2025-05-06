@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import domain.ProgramAward;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramAwardPersistence implements IProgramAwardPersistence {
+
     @Override
     public boolean addProgramAward(ProgramAward programAward) throws Exception {
-       int affectedRow;
+        int affectedRow;
         String query = "Insert into ProgramAward(name) values(?)";
         try (Connection conn = DbConnection.getConnection()) {
             try (PreparedStatement prepare = conn.prepareStatement(query)) {
@@ -22,7 +25,20 @@ public class ProgramAwardPersistence implements IProgramAwardPersistence {
 
     @Override
     public List<ProgramAward> getProgramAwards() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ProgramAward> awards = new ArrayList<ProgramAward>();
+        String sql = "Select * from ProgramAward Order By name ASC";
+        try (Connection conn = DbConnection.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                ResultSet rslt = stmt.executeQuery();
+                while (rslt.next()) {
+                    ProgramAward award = new ProgramAward();
+                    award.setId(rslt.getInt("id"));
+                    award.setName(rslt.getString("name"));
+                    awards.add(award);
+                }
+            }
+        }
+        return awards;
     }
 
 }

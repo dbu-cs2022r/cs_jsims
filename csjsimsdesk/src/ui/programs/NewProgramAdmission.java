@@ -6,9 +6,12 @@ package ui.programs;
 
 import domain.ProgramAdmission;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persistence.ProgramAdmissionPersistence;
 import service.IProgramAdmissionService;
 import service.ProgramAdmissionService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,9 +39,16 @@ public class NewProgramAdmission extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProgramAdmission = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New Program Admission Classfication");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Program Admission");
 
@@ -49,6 +59,26 @@ public class NewProgramAdmission extends javax.swing.JDialog {
             }
         });
 
+        tblProgramAdmission.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null}
+            },
+            new String [] {
+                "Program Admission Type"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblProgramAdmission.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tblProgramAdmission);
+        tblProgramAdmission.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,10 +87,11 @@ public class NewProgramAdmission extends javax.swing.JDialog {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnSave)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +102,9 @@ public class NewProgramAdmission extends javax.swing.JDialog {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSave)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,6 +125,7 @@ public class NewProgramAdmission extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Record saved successfuly.", "JSims", JOptionPane.INFORMATION_MESSAGE);
                 txtName.setText("");
                 txtName.requestFocusInWindow();
+                loadProgramAdmissions();
             } else {
                 JOptionPane.showMessageDialog(this, "Saving record faild. Try again.", "JSims", JOptionPane.ERROR_MESSAGE);
             }
@@ -99,6 +133,10 @@ public class NewProgramAdmission extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "JSims", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        loadProgramAdmissions();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -145,6 +183,22 @@ public class NewProgramAdmission extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblProgramAdmission;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    private void loadProgramAdmissions() {
+        try {
+            IProgramAdmissionService admissionService = new ProgramAdmissionService(new ProgramAdmissionPersistence());
+            var admissions = admissionService.getProgramAdmissions();
+            DefaultTableModel tableModel = (DefaultTableModel) tblProgramAdmission.getModel();
+            tableModel.setRowCount(0);
+            for (ProgramAdmission admission : admissions) {
+                tableModel.addRow(new Object[]{admission.getName()});
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(NewProgramAdmission.class.getName()).log(Level.SEVERE, ex.getMessage());
+        }
+    }
 }
