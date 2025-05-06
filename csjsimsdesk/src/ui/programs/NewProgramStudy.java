@@ -259,7 +259,7 @@ public class NewProgramStudy extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            if (cmbProgramAdmission.getSelectedIndex() < 0 || cmbProgramAward.getSelectedIndex() < 0 || cmbDepartment.getSelectedIndex() < 0) {
+            if (cmbProgramAdmission.getSelectedIndex() < 0 || cmbProgramAward.getSelectedIndex() < 0 || cmbFieldOfStudy.getSelectedIndex() < 0) {
                 JOptionPane.showMessageDialog(this, "Please fill all required fields.", "JSims", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -409,6 +409,8 @@ public class NewProgramStudy extends javax.swing.JDialog {
     }
 
     private void loadProgramStudies() {
+        DefaultTableModel tableModel = (DefaultTableModel) tblProgramStudy.getModel();
+        tableModel.setRowCount(0);
         if (cmbFieldOfStudy.getSelectedIndex() < 0) {
             return;
         }
@@ -416,8 +418,6 @@ public class NewProgramStudy extends javax.swing.JDialog {
             IProgramStudyService studyService = new ProgramStudyService(new ProgramStudyPersistence());
             var fieldSelected = (DropListItem) cmbFieldOfStudy.getSelectedItem();
             var programStudies = studyService.getByFieldOfStudyId(fieldSelected.getCodeValue());
-            DefaultTableModel tableModel = (DefaultTableModel) tblProgramStudy.getModel();
-            tableModel.setRowCount(0);
             for (ProgramStudyDO programStudy : programStudies) {
                 tableModel.addRow(new Object[]{programStudy.getFieldOfStudy(), programStudy.getProgramAward(), programStudy.getProgramAdmission()});
             }
