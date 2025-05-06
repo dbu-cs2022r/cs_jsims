@@ -7,6 +7,7 @@ package ui;
 import ui.programs.NewFieldOfStudy;
 import ui.programs.NewProgramAdmission;
 import ui.programs.NewProgramAward;
+import ui.programs.NewProgramStudy;
 
 /**
  *
@@ -122,6 +123,11 @@ public class JSimsMain extends javax.swing.JFrame {
         jMenu1.add(mnuProgramAdmission);
 
         mnuProgramStudy.setText("Program Study");
+        mnuProgramStudy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProgramStudyActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnuProgramStudy);
 
         menuBar.add(jMenu1);
@@ -197,6 +203,12 @@ public class JSimsMain extends javax.swing.JFrame {
         form.setLocationRelativeTo(this);
         form.setVisible(true);
     }//GEN-LAST:event_mnuProgramAdmissionActionPerformed
+
+    private void mnuProgramStudyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramStudyActionPerformed
+        NewProgramStudy form = new NewProgramStudy(this, true);
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+    }//GEN-LAST:event_mnuProgramStudyActionPerformed
 
     /**
      * @param args the command line arguments

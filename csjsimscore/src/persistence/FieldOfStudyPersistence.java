@@ -36,7 +36,7 @@ public class FieldOfStudyPersistence implements IFieldOfStudyPersistence {
             FieldOfStudy fieldOfStudy = new FieldOfStudy();
             fieldOfStudy.setId(rslt.getInt("id"));
             fieldOfStudy.setName(rslt.getString("name"));
-            fieldOfStudy.setDepartmentId(rslt.getInt("collegeid"));
+            fieldOfStudy.setDepartmentId(rslt.getInt("departmentid"));
             fieldOfStudies.add(fieldOfStudy);
         }
         return fieldOfStudies;

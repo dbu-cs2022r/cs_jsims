@@ -6,16 +6,29 @@ package service;
 
 import domain.FieldOfStudy;
 import java.sql.SQLException;
+import java.util.List;
+import persistence.IFieldOfStudyPersistence;
 
 /**
  *
  * @author ChalewT
  */
 public class FieldOfStudyService implements IFieldOfStudyService {
-
+    
+    private final IFieldOfStudyPersistence fieldOfStudyPersistewnce;
+    
+    public FieldOfStudyService(IFieldOfStudyPersistence fieldOfStudyPersistewnce) {
+        this.fieldOfStudyPersistewnce = fieldOfStudyPersistewnce;
+    }
+    
     @Override
-    public boolean register(FieldOfStudy FieldOfStudy) throws SQLException {
-        throw new UnsupportedOperationException("Not Implemented yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean register(FieldOfStudy fieldOfStudy) throws SQLException {
+        return fieldOfStudyPersistewnce.save(fieldOfStudy);
+    }
+    
+    @Override
+    public List<FieldOfStudy> getByDepartmentId(int departmentId) throws Exception {
+        return fieldOfStudyPersistewnce.getByDepartmentId(departmentId);
     }
     
 }

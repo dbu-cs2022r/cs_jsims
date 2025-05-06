@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import persistence.FieldOfStudyPersistence;
 import service.CollegeService;
 import service.DepartmentService;
 import service.FieldOfStudyService;
@@ -126,7 +127,7 @@ public class NewFieldOfStudy extends javax.swing.JDialog {
                 return;
             }
             FieldOfStudy field = new FieldOfStudy();
-            IFieldOfStudyService service = new FieldOfStudyService();
+            IFieldOfStudyService service = new FieldOfStudyService(new FieldOfStudyPersistence());
             field.setName(txtName.getText());
             var departmentSelected = (DropListItem) cmbDepartment.getSelectedItem();
             field.setDepartmentId(departmentSelected.getCodeValue());
