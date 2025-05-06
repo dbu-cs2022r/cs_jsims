@@ -4,6 +4,7 @@ package persistence;
 import domain.ProgramAdmission;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 public class ProgramAdmissionPersistence implements IProgramAdmissionPersistence {
 
@@ -18,6 +19,11 @@ public class ProgramAdmissionPersistence implements IProgramAdmissionPersistence
             }
         }
         return affectedRow > 0;
+    }
+
+    @Override
+    public List<ProgramAdmission> getProgramAdmissions() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

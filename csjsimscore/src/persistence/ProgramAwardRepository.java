@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import domain.ProgramAward;
+import java.util.List;
 
 public class ProgramAwardRepository implements IProgramAwardRepository {
     @Override
@@ -17,6 +18,11 @@ public class ProgramAwardRepository implements IProgramAwardRepository {
             }
         }
         return affectedRow > 0;
+    }
+
+    @Override
+    public List<ProgramAward> getProgramAwards() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -6,6 +6,7 @@ package persistence;
 
 import domain.FieldOfStudy;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import java.sql.SQLException;
 public interface IFieldOfStudyPersistence {
 
     boolean save(FieldOfStudy fieldOfStudy) throws SQLException;
+
+    List<FieldOfStudy> getByDepartmentId(int departmentId) throws Exception;
 }
