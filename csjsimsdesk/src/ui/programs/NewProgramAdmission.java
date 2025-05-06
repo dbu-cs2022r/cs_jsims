@@ -43,7 +43,7 @@ public class NewProgramAdmission extends javax.swing.JDialog {
         tblProgramAdmission = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("New Program Admission Classfication");
+        setTitle("Program Admission Classfication");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

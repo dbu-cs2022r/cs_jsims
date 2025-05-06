@@ -5,7 +5,10 @@
 package ui.programs;
 
 import domain.ProgramAward;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persistence.ProgramAwardPersistence;
 import service.IProgramAwardService;
 import service.ProgramAwardService;
@@ -36,9 +39,16 @@ public class NewProgramAward extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProgramAward = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("New Program Award Type");
+        setTitle("Program Award Type");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Program Award");
 
@@ -49,6 +59,25 @@ public class NewProgramAward extends javax.swing.JDialog {
             }
         });
 
+        tblProgramAward.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null}
+            },
+            new String [] {
+                "Program Award Type"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblProgramAward.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tblProgramAward);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,10 +86,11 @@ public class NewProgramAward extends javax.swing.JDialog {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnSave)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +101,9 @@ public class NewProgramAward extends javax.swing.JDialog {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSave)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,6 +124,7 @@ public class NewProgramAward extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Record saved successfuly.", "JSims", JOptionPane.INFORMATION_MESSAGE);
                 txtName.setText("");
                 txtName.requestFocusInWindow();
+                loadProgramAwards();
             } else {
                 JOptionPane.showMessageDialog(this, "Saving record faild. Try again.", "JSims", JOptionPane.ERROR_MESSAGE);
             }
@@ -99,6 +132,10 @@ public class NewProgramAward extends javax.swing.JDialog {
              JOptionPane.showMessageDialog(this, ex.getMessage(), "JSims", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       loadProgramAwards();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -145,6 +182,22 @@ public class NewProgramAward extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblProgramAward;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    private void loadProgramAwards() {
+        try {
+            IProgramAwardService awardService = new ProgramAwardService(new ProgramAwardPersistence());
+            var awards = awardService.getProgramAwards();
+            DefaultTableModel tableModel = (DefaultTableModel) tblProgramAward.getModel();
+            tableModel.setRowCount(0);
+            for (ProgramAward award : awards) {
+                tableModel.addRow(new Object[]{award.getName()});
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(NewProgramAdmission.class.getName()).log(Level.SEVERE, ex.getMessage());
+        }
+    }
 }

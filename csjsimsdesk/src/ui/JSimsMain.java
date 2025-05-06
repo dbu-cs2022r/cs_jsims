@@ -152,7 +152,7 @@ public class JSimsMain extends javax.swing.JFrame {
             .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(817, 570));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
