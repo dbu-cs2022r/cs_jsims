@@ -1,12 +1,12 @@
 package service;
 
 import domain.ProgramAward;
-import persistence.IProgramAwardRepository;
+import persistence.IProgramAwardPersistence;
 
 public class ProgramAwardService implements IProgramAwardService {
-    private final IProgramAwardRepository programAwardRepository;
+    private final IProgramAwardPersistence programAwardRepository;
 
-    public ProgramAwardService(IProgramAwardRepository programAwardRepository) {
+    public ProgramAwardService(IProgramAwardPersistence programAwardRepository) {
         this.programAwardRepository = programAwardRepository;
     }
 

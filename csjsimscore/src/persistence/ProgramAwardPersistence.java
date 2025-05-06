@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import domain.ProgramAward;
 import java.util.List;
 
-public class ProgramAwardRepository implements IProgramAwardRepository {
+public class ProgramAwardPersistence implements IProgramAwardPersistence {
     @Override
     public boolean addProgramAward(ProgramAward programAward) throws Exception {
        int affectedRow;

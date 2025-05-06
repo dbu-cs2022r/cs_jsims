@@ -6,7 +6,7 @@ package ui.programs;
 
 import domain.ProgramAward;
 import javax.swing.JOptionPane;
-import persistence.ProgramAwardRepository;
+import persistence.ProgramAwardPersistence;
 import service.IProgramAwardService;
 import service.ProgramAwardService;
 
@@ -84,7 +84,7 @@ public class NewProgramAward extends javax.swing.JDialog {
                 return;
             }
             ProgramAward award = new ProgramAward();
-            IProgramAwardService service = new ProgramAwardService(new ProgramAwardRepository());
+            IProgramAwardService service = new ProgramAwardService(new ProgramAwardPersistence());
 
             award.setName(txtName.getText());
             var saved = service.addProgramAward(award);
