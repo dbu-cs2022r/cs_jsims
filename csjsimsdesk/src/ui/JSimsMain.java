@@ -5,6 +5,8 @@
 package ui;
 
 import ui.programs.NewFieldOfStudy;
+import ui.programs.NewProgramAdmission;
+import ui.programs.NewProgramAward;
 
 /**
  *
@@ -38,6 +40,9 @@ public class JSimsMain extends javax.swing.JFrame {
         mnuiViewColleges = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         mnuiNewFieldOfStudy = new javax.swing.JMenuItem();
+        mnuProgramAward = new javax.swing.JMenuItem();
+        mnuProgramAdmission = new javax.swing.JMenuItem();
+        mnuProgramStudy = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -99,6 +104,25 @@ public class JSimsMain extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnuiNewFieldOfStudy);
+
+        mnuProgramAward.setText("Program Award");
+        mnuProgramAward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProgramAwardActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuProgramAward);
+
+        mnuProgramAdmission.setText("Program Admission");
+        mnuProgramAdmission.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProgramAdmissionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuProgramAdmission);
+
+        mnuProgramStudy.setText("Program Study");
+        jMenu1.add(mnuProgramStudy);
 
         menuBar.add(jMenu1);
 
@@ -162,6 +186,18 @@ public class JSimsMain extends javax.swing.JFrame {
         field.setVisible(true);
     }//GEN-LAST:event_mnuiNewFieldOfStudyActionPerformed
 
+    private void mnuProgramAwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramAwardActionPerformed
+        NewProgramAward form = new NewProgramAward(this, true);
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+    }//GEN-LAST:event_mnuProgramAwardActionPerformed
+
+    private void mnuProgramAdmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProgramAdmissionActionPerformed
+        NewProgramAdmission form = new NewProgramAdmission(this, true);
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+    }//GEN-LAST:event_mnuProgramAdmissionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,6 +243,9 @@ public class JSimsMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu mnuOrganization;
+    private javax.swing.JMenuItem mnuProgramAdmission;
+    private javax.swing.JMenuItem mnuProgramAward;
+    private javax.swing.JMenuItem mnuProgramStudy;
     private javax.swing.JMenuItem mnuiNewCollege;
     private javax.swing.JMenuItem mnuiNewDepartment;
     private javax.swing.JMenuItem mnuiNewFieldOfStudy;
