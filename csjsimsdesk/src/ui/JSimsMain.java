@@ -50,6 +50,7 @@ public class JSimsMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JSims - Student Information Management System");
+        setExtendedState(MAXIMIZED_BOTH);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -65,7 +66,7 @@ public class JSimsMain extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        mnuOrganization.setMnemonic('O');
+        mnuOrganization.setMnemonic('I');
         mnuOrganization.setText("Institution");
 
         mnuiNewCollege.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -96,6 +97,7 @@ public class JSimsMain extends javax.swing.JFrame {
 
         menuBar.add(mnuOrganization);
 
+        jMenu1.setMnemonic('P');
         jMenu1.setText("Program");
 
         mnuiNewFieldOfStudy.setText("Field of Study");

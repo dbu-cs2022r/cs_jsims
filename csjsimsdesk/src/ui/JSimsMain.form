@@ -23,7 +23,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuOrganization">
           <Properties>
-            <Property name="mnemonic" type="int" value="79"/>
+            <Property name="mnemonic" type="int" value="73"/>
             <Property name="text" type="java.lang.String" value="Institution"/>
           </Properties>
           <SubComponents>
@@ -61,6 +61,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
+            <Property name="mnemonic" type="int" value="80"/>
             <Property name="text" type="java.lang.String" value="Program"/>
           </Properties>
           <SubComponents>
@@ -124,6 +125,9 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="JSims - Student Information Management System"/>
+    <Property name="extendedState" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="MAXIMIZED_BOTH" type="code"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBar"/>
