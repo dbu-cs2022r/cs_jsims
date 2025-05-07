@@ -1,46 +1,42 @@
-package ui.programs;
+package curriculum;
 
 import dataobject.ProgramStudyDO;
 import domain.College;
+import domain.Curriculum;
 import domain.Department;
 import domain.FieldOfStudy;
-import domain.ProgramAdmission;
-import domain.ProgramAward;
-import domain.ProgramStudy;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import persistence.CurriculumPersistence;
 import persistence.FieldOfStudyPersistence;
-import persistence.ProgramAdmissionPersistence;
-import persistence.ProgramAwardPersistence;
 import persistence.ProgramStudyPersistence;
 import service.CollegeService;
+import service.CurriculumService;
 import service.DepartmentService;
 import service.FieldOfStudyService;
 import service.ICollegeService;
+import service.ICurriculumService;
 import service.IDepartmentService;
 import service.IFieldOfStudyService;
-import service.IProgramAdmissionService;
-import service.IProgramAwardService;
 import service.IProgramStudyService;
-import service.ProgramAdmissionService;
-import service.ProgramAwardService;
 import service.ProgramStudyService;
 import ui.ViewCollege;
+import ui.programs.NewProgramStudy;
 import utility.DropListItem;
 
 /**
  *
  * @author ChalewT
  */
-public class NewProgramStudy extends javax.swing.JDialog {
+public class NewCurriculum extends javax.swing.JDialog {
 
     /**
-     * Creates new form NewProgramStudy
+     * Creates new form NewCurriculum
      */
-    public NewProgramStudy(java.awt.Frame parent, boolean modal) {
+    public NewCurriculum(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -59,27 +55,32 @@ public class NewProgramStudy extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cmbFieldOfStudy = new javax.swing.JComboBox<>();
-        cmbProgramAward = new javax.swing.JComboBox<>();
+        cmbProgramStudy = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        cmbProgramAdmission = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        btnSave = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cmbCollege = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblProgramStudy = new javax.swing.JTable();
+        btnSave = new javax.swing.JButton();
+        txtNomenclature = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtStayYear = new javax.swing.JFormattedTextField();
+        txtStatySemester = new javax.swing.JFormattedTextField();
+        txtVersion = new javax.swing.JTextField();
+        txtTotalCredit = new javax.swing.JFormattedTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Program Study");
-        setResizable(false);
+        setTitle("New Curriculum");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "New Program Study", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Program Study", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(51, 51, 255))); // NOI18N
 
         cmbDepartment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -97,16 +98,7 @@ public class NewProgramStudy extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setText("Program Award");
-
-        jLabel5.setText("Program Admission");
-
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Program Study");
 
         jLabel2.setText("College");
 
@@ -121,19 +113,16 @@ public class NewProgramStudy extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbFieldOfStudy, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbProgramAward, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbProgramAdmission, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSave)))
+                            .addComponent(cmbProgramStudy, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -162,51 +151,78 @@ public class NewProgramStudy extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cmbProgramAward, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(cmbProgramAdmission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSave)
+                    .addComponent(cmbProgramStudy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Available Program Studies", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "New Curriculum", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(51, 51, 255))); // NOI18N
 
-        tblProgramStudy.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null}
-            },
-            new String [] {
-                "Field of Study", "Program Award", "Admission Class"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblProgramStudy);
+
+        jLabel5.setText("Nomenclature");
+
+        jLabel6.setText("Stay Year");
+
+        jLabel7.setText("Stay Semester");
+
+        jLabel8.setText("Version");
+
+        jLabel9.setText("Total Credit");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNomenclature, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtStayYear, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnSave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtStatySemester, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtTotalCredit, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNomenclature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtStayYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtStatySemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTotalCredit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVersion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,32 +230,57 @@ public class NewProgramStudy extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmbDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartmentItemStateChanged
+        cmbFieldOfStudy.removeAllItems();
+        cmbProgramStudy.removeAllItems();
+        if (cmbDepartment.getSelectedIndex() < 0) {
+            return;
+        }
+        try {
+            DropListItem departmentItem = (DropListItem) cmbDepartment.getSelectedItem();
+            int departmentId = departmentItem.getCodeValue();
+            IFieldOfStudyService fieldService = new FieldOfStudyService(new FieldOfStudyPersistence());
+            var fields = fieldService.getByDepartmentId(departmentId);
+            for (FieldOfStudy field : fields) {
+                DropListItem fieldItem = new DropListItem(field.getId(), field.getName());
+                cmbFieldOfStudy.addItem(fieldItem);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
+        }
+    }//GEN-LAST:event_cmbDepartmentItemStateChanged
+
+    private void cmbFieldOfStudyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFieldOfStudyItemStateChanged
+        loadProgramStudies();
+    }//GEN-LAST:event_cmbFieldOfStudyItemStateChanged
+
     private void cmbCollegeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCollegeItemStateChanged
+        cmbProgramStudy.removeAllItems();
+        cmbFieldOfStudy.removeAllItems();
+        cmbDepartment.removeAllItems();
         if (cmbCollege.getSelectedIndex() < 0) {
             return;
         }
         try {
-            cmbDepartment.removeAllItems();
             DropListItem collegeItem = (DropListItem) cmbCollege.getSelectedItem();
             int collegeId = collegeItem.getCodeValue();
             IDepartmentService departmentService = new DepartmentService();
@@ -253,30 +294,24 @@ public class NewProgramStudy extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cmbCollegeItemStateChanged
 
-    private void cmbFieldOfStudyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFieldOfStudyItemStateChanged
-        loadProgramStudies();
-    }//GEN-LAST:event_cmbFieldOfStudyItemStateChanged
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            if (cmbProgramAdmission.getSelectedIndex() < 0 || cmbProgramAward.getSelectedIndex() < 0 || cmbFieldOfStudy.getSelectedIndex() < 0) {
+            if ("".equalsIgnoreCase(txtNomenclature.getText()) || cmbProgramStudy.getSelectedIndex() < 0) {
                 JOptionPane.showMessageDialog(this, "Please fill all required fields.", "JSims", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            ProgramStudy programStudy = new ProgramStudy();
-            IProgramStudyService studyService = new ProgramStudyService(new ProgramStudyPersistence());
-            var fieldSelected = (DropListItem) cmbFieldOfStudy.getSelectedItem();
-            var awardSelected = (DropListItem) cmbProgramAward.getSelectedItem();
-            var admissionSelected = (DropListItem) cmbProgramAdmission.getSelectedItem();
-
-            programStudy.setFieldOfStudyId(fieldSelected.getCodeValue());
-            programStudy.setProgramAwardId(awardSelected.getCodeValue());
-            programStudy.setProgramAdmissionId(admissionSelected.getCodeValue());
-
-            var saved = studyService.addProgramStudy(programStudy);
+            Curriculum curriculum = new Curriculum();
+            ICurriculumService curriculumService = new CurriculumService(new CurriculumPersistence());
+            var programStudySelected = (DropListItem) cmbProgramStudy.getSelectedItem();
+            curriculum.setProgramStudyId(programStudySelected.getCodeValue());
+            curriculum.setNomenclature(txtNomenclature.getText());
+            curriculum.setStayYear(Integer.parseInt(txtStayYear.getText()));
+            curriculum.setStaySemester(Integer.parseInt(txtStatySemester.getText()));
+            curriculum.setTotalCredit(Integer.parseInt(txtTotalCredit.getText()));
+            curriculum.setVersion(txtVersion.getText());
+            var saved = curriculumService.addCurriculum(curriculum);
             if (saved) {
                 JOptionPane.showMessageDialog(this, "Record saved successfuly.", "JSims", JOptionPane.INFORMATION_MESSAGE);
-                loadProgramStudies();
             } else {
                 JOptionPane.showMessageDialog(this, "Saving record faild. Try again.", "JSims", JOptionPane.ERROR_MESSAGE);
             }
@@ -295,32 +330,10 @@ public class NewProgramStudy extends javax.swing.JDialog {
                 DropListItem collegeItem = new DropListItem(college.getId(), college.getName());
                 cmbCollege.addItem(collegeItem);
             }
-            loadProgramAwards();
-            loadProgramAdmissions();
         } catch (SQLException ex) {
             Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
         }
     }//GEN-LAST:event_formWindowOpened
-
-    private void cmbDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartmentItemStateChanged
-        if (cmbDepartment.getSelectedIndex() < 0) {
-            return;
-        }
-        try {
-            cmbFieldOfStudy.removeAllItems();
-            DropListItem departmentItem = (DropListItem) cmbDepartment.getSelectedItem();
-            int departmentId = departmentItem.getCodeValue();
-            IFieldOfStudyService fieldService = new FieldOfStudyService(new FieldOfStudyPersistence());
-            var fields = fieldService.getByDepartmentId(departmentId);
-            for (FieldOfStudy field : fields) {
-                DropListItem fieldItem = new DropListItem(field.getId(), field.getName());
-                cmbFieldOfStudy.addItem(fieldItem);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ViewCollege.class.getName()).log(Level.SEVERE, ex.getMessage());
-        }
-
-    }//GEN-LAST:event_cmbDepartmentItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -339,20 +352,20 @@ public class NewProgramStudy extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewProgramStudy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewCurriculum.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewProgramStudy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewCurriculum.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewProgramStudy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewCurriculum.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewProgramStudy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewCurriculum.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewProgramStudy dialog = new NewProgramStudy(new javax.swing.JFrame(), true);
+                NewCurriculum dialog = new NewCurriculum(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -369,49 +382,27 @@ public class NewProgramStudy extends javax.swing.JDialog {
     private javax.swing.JComboBox<DropListItem> cmbCollege;
     private javax.swing.JComboBox<DropListItem> cmbDepartment;
     private javax.swing.JComboBox<DropListItem> cmbFieldOfStudy;
-    private javax.swing.JComboBox<DropListItem> cmbProgramAdmission;
-    private javax.swing.JComboBox<DropListItem> cmbProgramAward;
+    private javax.swing.JComboBox<DropListItem> cmbProgramStudy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProgramStudy;
+    private javax.swing.JTextField txtNomenclature;
+    private javax.swing.JFormattedTextField txtStatySemester;
+    private javax.swing.JFormattedTextField txtStayYear;
+    private javax.swing.JFormattedTextField txtTotalCredit;
+    private javax.swing.JTextField txtVersion;
     // End of variables declaration//GEN-END:variables
 
-    private void loadProgramAwards() {
-        try {
-            IProgramAwardService awardService = new ProgramAwardService(new ProgramAwardPersistence());
-            var awards = awardService.getProgramAwards();
-            for (ProgramAward award : awards) {
-                DropListItem fieldItem = new DropListItem(award.getId(), award.getName());
-                cmbProgramAward.addItem(fieldItem);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(NewProgramAdmission.class.getName()).log(Level.SEVERE, ex.getMessage());
-        }
-    }
-
-    private void loadProgramAdmissions() {
-        try {
-            IProgramAdmissionService admissionService = new ProgramAdmissionService(new ProgramAdmissionPersistence());
-            var admissions = admissionService.getProgramAdmissions();
-            
-            for (ProgramAdmission admission : admissions) {
-                DropListItem fieldItem = new DropListItem(admission.getId(), admission.getName());
-                cmbProgramAdmission.addItem(fieldItem);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(NewProgramAdmission.class.getName()).log(Level.SEVERE, ex.getMessage());
-        }
-    }
-
     private void loadProgramStudies() {
-        DefaultTableModel tableModel = (DefaultTableModel) tblProgramStudy.getModel();
-        tableModel.setRowCount(0);
+        cmbProgramStudy.removeAll();
         if (cmbFieldOfStudy.getSelectedIndex() < 0) {
             return;
         }
@@ -420,11 +411,11 @@ public class NewProgramStudy extends javax.swing.JDialog {
             var fieldSelected = (DropListItem) cmbFieldOfStudy.getSelectedItem();
             var programStudies = studyService.getByFieldOfStudyId(fieldSelected.getCodeValue());
             for (ProgramStudyDO programStudy : programStudies) {
-                tableModel.addRow(new Object[]{programStudy.getFieldOfStudy(), programStudy.getProgramAward(), programStudy.getProgramAdmission()});
+                DropListItem programItem = new DropListItem(programStudy.getProgramStudyId(), programStudy.getProgramAward() + " -> " + programStudy.getProgramAdmission());
+                cmbProgramStudy.addItem(programItem);
             }
         } catch (Exception ex) {
             Logger.getLogger(NewProgramStudy.class.getName()).log(Level.SEVERE, ex.getMessage());
         }
     }
-
 }

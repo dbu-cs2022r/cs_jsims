@@ -4,6 +4,7 @@
  */
 package ui;
 
+import curriculum.NewCurriculum;
 import ui.programs.NewFieldOfStudy;
 import ui.programs.NewProgramAdmission;
 import ui.programs.NewProgramAward;
@@ -44,6 +45,16 @@ public class JSimsMain extends javax.swing.JFrame {
         mnuProgramAward = new javax.swing.JMenuItem();
         mnuProgramAdmission = new javax.swing.JMenuItem();
         mnuProgramStudy = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mnuNewCurriculum = new javax.swing.JMenuItem();
+        mnuViewCurriculla = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        mnuAvailableProgram = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuAdmitStudent = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnuAcademicYear = new javax.swing.JMenuItem();
+        mnuAcademicSemester = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -134,6 +145,69 @@ public class JSimsMain extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
+        jMenu2.setText("Curriculum");
+
+        mnuNewCurriculum.setText("New Curriculum");
+        mnuNewCurriculum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuNewCurriculumActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuNewCurriculum);
+
+        mnuViewCurriculla.setText("View Curricula");
+        mnuViewCurriculla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuViewCurricullaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuViewCurriculla);
+
+        jMenuItem2.setText("Course");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        menuBar.add(jMenu2);
+
+        mnuAvailableProgram.setText("Admission");
+
+        jMenuItem1.setText("Available Programs");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuAvailableProgram.add(jMenuItem1);
+
+        mnuAdmitStudent.setText("Admit Student");
+        mnuAdmitStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAdmitStudentActionPerformed(evt);
+            }
+        });
+        mnuAvailableProgram.add(mnuAdmitStudent);
+
+        menuBar.add(mnuAvailableProgram);
+
+        jMenu3.setText("Ac Calender");
+
+        mnuAcademicYear.setText("Academic Year");
+        mnuAcademicYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAcademicYearActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuAcademicYear);
+
+        mnuAcademicSemester.setText("Academic Semester");
+        jMenu3.add(mnuAcademicSemester);
+
+        menuBar.add(jMenu3);
+
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
@@ -212,6 +286,32 @@ public class JSimsMain extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_mnuProgramStudyActionPerformed
 
+    private void mnuNewCurriculumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuNewCurriculumActionPerformed
+        NewCurriculum form = new NewCurriculum(this, true);
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+    }//GEN-LAST:event_mnuNewCurriculumActionPerformed
+
+    private void mnuViewCurricullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuViewCurricullaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuViewCurricullaActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnuAdmitStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAdmitStudentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuAdmitStudentActionPerformed
+
+    private void mnuAcademicYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcademicYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuAcademicYearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,11 +355,21 @@ public class JSimsMain extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem mnuAcademicSemester;
+    private javax.swing.JMenuItem mnuAcademicYear;
+    private javax.swing.JMenuItem mnuAdmitStudent;
+    private javax.swing.JMenu mnuAvailableProgram;
+    private javax.swing.JMenuItem mnuNewCurriculum;
     private javax.swing.JMenu mnuOrganization;
     private javax.swing.JMenuItem mnuProgramAdmission;
     private javax.swing.JMenuItem mnuProgramAward;
     private javax.swing.JMenuItem mnuProgramStudy;
+    private javax.swing.JMenuItem mnuViewCurriculla;
     private javax.swing.JMenuItem mnuiNewCollege;
     private javax.swing.JMenuItem mnuiNewDepartment;
     private javax.swing.JMenuItem mnuiNewFieldOfStudy;
