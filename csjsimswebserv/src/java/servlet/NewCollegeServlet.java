@@ -1,4 +1,4 @@
-package servelet;
+package servlet;
 
 import domain.College;
 import java.io.IOException;
