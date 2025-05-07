@@ -46,19 +46,20 @@ public class CollegeServlet extends HttpServlet {
                 out.println("<body>");
                 out.println("<div><h1 style=\"text-align:center;\">CS J-Sims</h1></div>");
                 out.println(" <hr/>");
-                out.println("<h2 style=\"color:green;\">List of Available Colleges</h2>");
+                out.println("<h2 style=\"color:green;\">List of available Colleges</h2>");
                 out.print("<hr/>");
-                out.println("<table>");
+                out.println("<table border=\"1\">");
                 out.println("<tr>");
-                out.println("<th>Code</th>");
-                out.println("<th>College</th>");
+                out.println("<th>No.</th>");
+                out.println("<th align=\"center\">College</th>");
                 out.println("</tr>");
-
+                int i = 1;
                 for (College college : colleges) {
                     out.println("<tr>");
-                    out.println("<td>" + college.getId() + "<td>");
-                    out.println("<td>" + college.getName() + "<td>");
+                    out.println("<td>" + i + "</td>");
+                    out.println("<td>" + college.getName() + "</td>");
                     out.println(" </tr>");
+                    i++;
                 }
 
                 out.println("</table>");
