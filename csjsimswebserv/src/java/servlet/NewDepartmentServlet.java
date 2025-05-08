@@ -44,11 +44,6 @@ public class NewDepartmentServlet extends HttpServlet {
         }
     }
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
-
     protected void getCollegesRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {

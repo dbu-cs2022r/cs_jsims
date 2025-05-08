@@ -78,7 +78,7 @@ public class NewCollegeServlet extends HttpServlet {
             out.println(" <div><h1 style=\"text-align:center;\">CS J-Sims</h1></div>");
             out.println(" <hr/>");
             out.println("<h2>" + request.getAttribute("college") + "</h2>");
-            out.println("<h2 style=\"color:green;\">College record saved successfully.</h2>");
+            out.println("<h2 style=\"color:green;\">Record saved successfully.</h2>");
             out.println(" <hr/>");
             out.println("""
                      <a href="index.html">Back to home</a> | 
