@@ -18,6 +18,20 @@ import service.ICollegeService;
 public class CollegeServlet extends HttpServlet {
 
     @Override
+    public void init() {
+        System.out.println("CollegeServlet on init");
+    }
+
+    public void service() {
+        System.out.println("CollegeServlet on service");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("CollegeServlet on destroy");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         getColleges(request, response);
@@ -70,6 +84,7 @@ public class CollegeServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CollegeServlet.class.getName()).log(Level.SEVERE, ex.getMessage());
+            response.getWriter().println("Sorry, try again. Something went wrong." + ex.getMessage());
         }
     }
 
