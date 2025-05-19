@@ -18,29 +18,9 @@ import service.ICollegeService;
 public class CollegeServlet extends HttpServlet {
 
     @Override
-    public void init() {
-        System.out.println("CollegeServlet on init");
-    }
-
-    public void service() {
-        System.out.println("CollegeServlet on service");
-    }
-
-    @Override
-    public void destroy() {
-        System.out.println("CollegeServlet on destroy");
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         getColleges(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        addCollege(request, response);
     }
 
     protected void getColleges(HttpServletRequest request, HttpServletResponse response)
@@ -86,10 +66,6 @@ public class CollegeServlet extends HttpServlet {
             Logger.getLogger(CollegeServlet.class.getName()).log(Level.SEVERE, ex.getMessage());
             response.getWriter().println("Sorry, try again. Something went wrong." + ex.getMessage());
         }
-    }
-
-    private void addCollege(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
