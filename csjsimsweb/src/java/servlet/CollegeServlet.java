@@ -64,7 +64,6 @@ public class CollegeServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CollegeServlet.class.getName()).log(Level.SEVERE, ex.getMessage());
-            //response.getWriter().println("Sorry, try again. Something went wrong." + ex.getMessage());
             request.getRequestDispatcher("/WEB-INF/error.html").forward(request, response);
         }
     }
